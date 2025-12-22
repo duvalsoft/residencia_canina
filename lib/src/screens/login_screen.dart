@@ -30,11 +30,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _loadSavedCredentials() async {
     final credentials = await PreferencesService.getCredentials();
-    // Use hardcoded values as fallback for development
-    _urlController = TextEditingController(text: credentials['baseUrl'] ?? 'https://tumburu.es');
-    _dbController = TextEditingController(text: credentials['database'] ?? 'betat1');
-    _emailController = TextEditingController(text: credentials['username'] ?? 'duvalsoft@gmail.com');
-    _passwordController = TextEditingController(text: credentials['password'] ?? 'Odisea2001');
+    _urlController = TextEditingController(
+        text: credentials['baseUrl']!.isNotEmpty
+            ? credentials['baseUrl']
+            : 'https://tumburu.es');
+    _dbController = TextEditingController(
+        text: credentials['database']!.isNotEmpty
+            ? credentials['database']
+            : 'betat1');
+    _emailController = TextEditingController(
+        text: credentials['username']!.isNotEmpty
+            ? credentials['username']
+            : 'duvalsoft@gmail.com');
+    _passwordController = TextEditingController(
+        text: credentials['password']!.isNotEmpty
+            ? credentials['password']
+            : 'Odisea2001');
   }
 
   Future<void> _login() async {
@@ -47,11 +58,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       OdooService.instance.setBaseUrl(_urlController.text);
-      
+
       await OdooService.instance.authenticate(
         _dbController.text,
         _emailController.text,
         _passwordController.text,
+      );
+
+      // Save credentials on successful login
+      await PreferencesService.saveCredentials(
+        baseUrl: _urlController.text,
+        database: _dbController.text,
+        username: _emailController.text,
+        password: _passwordController.text,
       );
 
       if (!mounted) return;

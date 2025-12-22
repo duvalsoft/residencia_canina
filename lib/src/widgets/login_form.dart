@@ -9,10 +9,10 @@ class LoginForm extends StatefulWidget {
   const LoginForm({Key? key, required this.onSubmit, this.isLoading = false}) : super(key: key);
 
   @override
-  _LoginFormState createState() => _LoginFormState();
+  LoginFormState createState() => LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _serverUrlController = TextEditingController(text: 'http://192.168.1.80:10019');
   final _dbController = TextEditingController(text: 'odoo2');
@@ -38,31 +38,31 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           TextFormField(
             controller: _serverUrlController,
-            decoration: InputDecoration(labelText: 'Server URL'),
+            decoration: const InputDecoration(labelText: 'Server URL'),
             validator: (value) => value!.isEmpty ? 'Please enter a server URL' : null,
           ),
           TextFormField(
             controller: _dbController,
-            decoration: InputDecoration(labelText: 'Database'),
+            decoration: const InputDecoration(labelText: 'Database'),
             validator: (value) => value!.isEmpty ? 'Please enter a database' : null,
           ),
           TextFormField(
             controller: _userController,
-            decoration: InputDecoration(labelText: 'Username'),
+            decoration: const InputDecoration(labelText: 'Username'),
             validator: (value) => value!.isEmpty ? 'Please enter a username' : null,
           ),
           TextFormField(
             controller: _passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: const InputDecoration(labelText: 'Password'),
             obscureText: true,
             validator: (value) => value!.isEmpty ? 'Please enter a password' : null,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           widget.isLoading
-              ? CircularProgressIndicator()
+              ? const CircularProgressIndicator()
               : ElevatedButton(
                   onPressed: _submitForm,
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
         ],
       ),

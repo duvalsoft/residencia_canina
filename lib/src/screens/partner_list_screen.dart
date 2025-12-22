@@ -12,7 +12,7 @@ class PartnerListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Partners')),
+      appBar: AppBar(title: const Text('Partners')),
       body: ListView.builder(
         itemCount: partners.length,
         itemBuilder: (context, index) => PartnerListItem(partner: partners[index]),
