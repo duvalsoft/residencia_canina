@@ -1,6 +1,8 @@
+
 // lib/src/screens/partners_screen.dart
 import 'package:flutter/material.dart';
 import '../data/database.dart';
+import '../data/connection/connection.dart'; // Importar el nuevo archivo de conexión
 import '../services/sync_service.dart';
 import '../services/odoo_service.dart';
 import '../repositories/clientes_repository.dart';
@@ -21,7 +23,8 @@ class _PartnersScreenState extends State<PartnersScreen> {
   @override
   void initState() {
     super.initState();
-    _db = AppDatabase();
+    // Utilizar el nuevo mecanismo para crear la base de datos
+    _db = AppDatabase(createExecutor());
     _repository = ClientesRepository(_db, OdooService.instance);
     
     // Inicializar SyncService

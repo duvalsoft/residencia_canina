@@ -7,7 +7,7 @@ import '../widgets/partner_list_item.dart';
 class PartnerListScreen extends StatelessWidget {
   final List<ResPartner> partners;
 
-  const PartnerListScreen({Key? key, required this.partners}) : super(key: key);
+  const PartnerListScreen({super.key, required this.partners});
 
   @override
   Widget build(BuildContext context) {

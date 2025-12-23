@@ -7,7 +7,7 @@ part 'sync_log_dao.g.dart';
 
 @DriftAccessor(tables: [SyncLogTable])
 class SyncLogDao extends DatabaseAccessor<AppDatabase> with _$SyncLogDaoMixin {
-  SyncLogDao(AppDatabase db) : super(db);
+  SyncLogDao(super.db);
 
   /// Crear un log de sincronización
   Future<int> createLog({

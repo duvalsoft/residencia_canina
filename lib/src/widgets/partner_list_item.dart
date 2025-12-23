@@ -6,7 +6,7 @@ import '../models/res_partner.dart';
 class PartnerListItem extends StatelessWidget {
   final ResPartner partner;
 
-  const PartnerListItem({Key? key, required this.partner}) : super(key: key);
+  const PartnerListItem({super.key, required this.partner});
 
   @override
   Widget build(BuildContext context) {

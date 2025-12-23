@@ -6,7 +6,7 @@ class LoginForm extends StatefulWidget {
   final Function(String, String, String, String) onSubmit;
   final bool isLoading;
 
-  const LoginForm({Key? key, required this.onSubmit, this.isLoading = false}) : super(key: key);
+  const LoginForm({super.key, required this.onSubmit, this.isLoading = false});
 
   @override
   LoginFormState createState() => LoginFormState();

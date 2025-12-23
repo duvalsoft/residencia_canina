@@ -1,4 +1,3 @@
-// lib/src/data/database.dart
 import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
@@ -30,23 +29,27 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onCreate: (Migrator m) async {
-          await m.createAll();
-        },
-        onUpgrade: (Migrator m, int from, int to) async {
-          // Futuras migraciones aquí
-          // Ejemplo para versión 2:
-          // if (from < 2) {
-          //   await m.addColumn(clientesTable, clientesTable.nuevaColumna);
-          // }
-        },
-      );
+    onCreate: (Migrator m) async {
+      await m.createAll();
+      print('✅ Base de datos creada correctamente');
+    },
+    onUpgrade: (Migrator m, int from, int to) async {
+      // Migraciones futuras aquí
+      print('🔄 Migrando base de datos de v$from a v$to');
+    },
+  );
 }
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
+    print('📱 Inicializando Drift para Android (SQLite nativo)');
+    
     final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'app_database.sqlite'));
+    final file = File(p.join(dbFolder.path, 'odoo_rpc.sqlite'));
+    
+    print('📂 Base de datos en: ${file.path}');
+    
+    // Usando NativeDatabase con archivo en background
     return NativeDatabase.createInBackground(file);
   });
 }

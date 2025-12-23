@@ -22,7 +22,9 @@ class $ClientesTableTable extends ClientesTable
   @override
   late final GeneratedColumn<int> odooId = GeneratedColumn<int>(
       'odoo_id', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -373,7 +375,7 @@ class ClienteDb extends DataClass implements Insertable<ClienteDb> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ClienteDb(
       id: serializer.fromJson<int>(json['id']),
-      odooId: serializer.fromJson<int?>(json['odooId']),
+      odooId: serializer.fromJson<int?>(json['odoo_id']),
       name: serializer.fromJson<String>(json['name']),
       email: serializer.fromJson<String?>(json['email']),
       phone: serializer.fromJson<String?>(json['phone']),
@@ -381,13 +383,13 @@ class ClienteDb extends DataClass implements Insertable<ClienteDb> {
       street: serializer.fromJson<String?>(json['street']),
       city: serializer.fromJson<String?>(json['city']),
       zip: serializer.fromJson<String?>(json['zip']),
-      countryId: serializer.fromJson<int?>(json['countryId']),
-      isSynced: serializer.fromJson<bool>(json['isSynced']),
-      hasPendingChanges: serializer.fromJson<bool>(json['hasPendingChanges']),
-      isDeleted: serializer.fromJson<bool>(json['isDeleted']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
-      lastSyncAt: serializer.fromJson<DateTime?>(json['lastSyncAt']),
+      countryId: serializer.fromJson<int?>(json['country_id']),
+      isSynced: serializer.fromJson<bool>(json['is_synced']),
+      hasPendingChanges: serializer.fromJson<bool>(json['has_pending_changes']),
+      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
+      createdAt: serializer.fromJson<DateTime>(json['created_at']),
+      updatedAt: serializer.fromJson<DateTime>(json['updated_at']),
+      lastSyncAt: serializer.fromJson<DateTime?>(json['last_sync_at']),
     );
   }
   @override
@@ -395,7 +397,7 @@ class ClienteDb extends DataClass implements Insertable<ClienteDb> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'odooId': serializer.toJson<int?>(odooId),
+      'odoo_id': serializer.toJson<int?>(odooId),
       'name': serializer.toJson<String>(name),
       'email': serializer.toJson<String?>(email),
       'phone': serializer.toJson<String?>(phone),
@@ -403,13 +405,13 @@ class ClienteDb extends DataClass implements Insertable<ClienteDb> {
       'street': serializer.toJson<String?>(street),
       'city': serializer.toJson<String?>(city),
       'zip': serializer.toJson<String?>(zip),
-      'countryId': serializer.toJson<int?>(countryId),
-      'isSynced': serializer.toJson<bool>(isSynced),
-      'hasPendingChanges': serializer.toJson<bool>(hasPendingChanges),
-      'isDeleted': serializer.toJson<bool>(isDeleted),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
-      'updatedAt': serializer.toJson<DateTime>(updatedAt),
-      'lastSyncAt': serializer.toJson<DateTime?>(lastSyncAt),
+      'country_id': serializer.toJson<int?>(countryId),
+      'is_synced': serializer.toJson<bool>(isSynced),
+      'has_pending_changes': serializer.toJson<bool>(hasPendingChanges),
+      'is_deleted': serializer.toJson<bool>(isDeleted),
+      'created_at': serializer.toJson<DateTime>(createdAt),
+      'updated_at': serializer.toJson<DateTime>(updatedAt),
+      'last_sync_at': serializer.toJson<DateTime?>(lastSyncAt),
     };
   }
 
