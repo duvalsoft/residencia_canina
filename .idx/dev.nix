@@ -7,8 +7,7 @@
     pkgs.unzip
     pkgs.git
     
-    # Android SDK y emulador
-    pkgs.android-studio
+    # Android SDK (no instales android-studio completo, es muy pesado)
     pkgs.android-tools
     
     # Dependencias para SQLite nativo
@@ -21,8 +20,8 @@
   
   env = {
     FLUTTER_ROOT = "${pkgs.flutter}";
-    ANDROID_HOME = "$HOME/Android/Sdk";
-    ANDROID_SDK_ROOT = "$HOME/Android/Sdk";
+    # Para Project IDX no necesitas configurar ANDROID_HOME manualmente
+    # Ya viene preconfigurado
     
     # Variables para compilación nativa
     LD_LIBRARY_PATH = "${pkgs.sqlite.out}/lib";
@@ -41,11 +40,8 @@
       };
       
       onStart = {
-        flutter-config = "flutter config --no-analytics --android-sdk $ANDROID_HOME";
-        flutter-clean = "flutter clean";
+        flutter-config = "flutter config --no-analytics";
         flutter-pub-get = "flutter pub get";
-        # Inicia el emulador al cargar el IDE
-        start-emulator = "emulator -avd Pixel_5_API_34 -no-snapshot-load &";
       };
     };
     
@@ -55,9 +51,7 @@
         android = {
           command = [
             "flutter" 
-            "run" 
-            "-d" 
-            "emulator-5554"  # ID típico del primer emulador
+            "run"
           ];
           manager = "flutter";
         };
